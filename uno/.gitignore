@@ -1,0 +1,27 @@
+# Build artifacts
+/target/
+/build/
+/out/
+*.class
+*.jar
+.DS_Store
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Environment files
+*.env
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
