@@ -65,8 +65,8 @@ public class GUI extends Application
     private void switchToRightCard()
     {
         int handSize = playerData.getHand().size();
-        if(currentCardIndex+1 >= handSize)  currentCardIndex = 0;
-        else 								currentCardIndex++;
+        if(currentCardIndex+1 >= handSize) currentCardIndex = 0;
+        else currentCardIndex++;
 
         updateCardCount();
         printCurrentCard();
@@ -79,8 +79,9 @@ public class GUI extends Application
     {
         int handSize = playerData.getHand().size();
         if(handSize == 0) return;
-        if(currentCardIndex-1 < 0) 	currentCardIndex = handSize-1;
-        else 						currentCardIndex--;
+        
+        if(currentCardIndex-1 < 0) currentCardIndex = handSize-1;
+        else currentCardIndex--;
         
         updateCardCount();
         printCurrentCard();
@@ -111,8 +112,8 @@ public class GUI extends Application
     
     public void changeToNearest()
     {
-        if(currentCardIndex <= 0) 	currentCardIndex = 0;
-        else 						currentCardIndex--;
+        if(currentCardIndex <= 0) currentCardIndex = 0;
+        else currentCardIndex--;
 
         setCardColor(myCardRect,getCurrentCard());
         Platform.runLater(this::printCurrentCard);

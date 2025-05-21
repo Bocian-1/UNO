@@ -36,10 +36,7 @@ public class GameData
     
     public Card drawCard()
     {
-        if(!deck.canDraw())
-        {
-            swapPileWithDeck();
-        }
+        if(!deck.canDraw()) swapPileWithDeck();
         return deck.drawCard();
     }
     

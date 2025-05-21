@@ -30,37 +30,17 @@ public class Deck
         //tworzenie zer
         for(int i = 0;i<4;i++)
         {
-            deck[head] = new Card(Value.zero,Color.valueOf(0+i));
-            head++;
-        }
-        
-        //head = addCardType(24,Color.red,head);
-        //head = addCardType(24,Color.blue,head);
-        //head = addCardType(24,Color.green,head);
-        //head = addCardType(24,Color.yellow,head);
-        
-        for(int i = 0;i<24;i++)
-        {
-            deck[head] = new Card( Value.valueOf(i/2+1),Color.red);
+            deck[head] = new Card(Value.valueOf(0),Color.valueOf(0+i));
             head++;
         }
         
         for(int i = 0;i<24;i++)
         {
-            deck[head] = new Card( Value.valueOf(i/2+1),Color.blue);
-            head++;
-        }
-        
-        for(int i = 0;i<24;i++)
-        {
-            deck[head] = new Card( Value.valueOf(i/2+1),Color.green);
-            head++;
-        }
-        
-        for(int i = 0;i<24;i++)
-        {
-            deck[head] = new Card( Value.valueOf(i/2+1),Color.yellow);
-            head++;
+            deck[head  ] = new Card( Value.valueOf(i/2+1),Color.red);
+            deck[head+1] = new Card( Value.valueOf(i/2+1),Color.blue);
+            deck[head+2] = new Card( Value.valueOf(i/2+1),Color.green);
+            deck[head+3] = new Card( Value.valueOf(i/2+1),Color.yellow);
+            head+=4;
         }
         
         for(int i = 0;i<8;i++)
@@ -71,16 +51,6 @@ public class Deck
         
         //System.out.println(currentIndex);
     }
-    
-    
-    private int addCardType (int count, Color color, int head) {
-    	for(int i = 0;i<count;i++)
-        {
-            deck[head+i] = new Card( Value.valueOf(i/2+1),Color.green);
-        }
-    	return head+count;
-    }
-    
     
     public void generateDeckFromDiscardPile(List<Card> cards)
     {
