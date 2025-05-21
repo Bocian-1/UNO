@@ -145,9 +145,12 @@ public class Client implements Runnable
     
     public void drawACard()
     {
-        try {
+        try
+        {
             sendRequestToServer(Request.drawCard());
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             throw new RuntimeException(e);
         }
     }
