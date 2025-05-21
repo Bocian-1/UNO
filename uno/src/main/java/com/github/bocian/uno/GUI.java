@@ -48,10 +48,7 @@ public class GUI extends Application
     private void setCardColor(Rectangle rect,Card card) { rect.setFill(getColor(card)); }
     
     
-    public GUI()
-    {
-    	//TODO
-    }
+    public GUI(){}
     
     
     @FXML
@@ -92,7 +89,7 @@ public class GUI extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/uno/hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/github/bocian/hello-view.fxml"));
         Parent root = loader.load();
         instance = loader.getController();
 
