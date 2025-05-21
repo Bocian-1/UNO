@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.10.2</junit.version>
   </properties>
 
   <dependencies>
@@ -36,12 +37,21 @@
   
   <build>
     <plugins>
+    	<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+            <configuration>
+                <source>24</source>
+                <target>24</target>
+            </configuration>
+        </plugin>
         <plugin>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-maven-plugin</artifactId>
             <version>0.0.8</version>
             <configuration>
-                <mainClass>com.github.bocian.uno.App</mainClass>
+                <mainClass>com.github.bocian.uno.HelloApplication</mainClass>
             </configuration>
         </plugin>
     </plugins>
