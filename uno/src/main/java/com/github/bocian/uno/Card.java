@@ -2,6 +2,7 @@ package com.github.bocian.uno;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Card implements Serializable
 {
     Value value;

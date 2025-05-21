@@ -9,13 +9,13 @@ import javafx.stage.Stage;
 
 public class HelloApplication extends Application
 {
-    @Override
+	@Override
     public void start(Stage stage)
     {
         Label label = new Label("Witaj!");
         Button button = new Button("Kliknij mnie");
 
-        button.setOnAction(e -> label.setText("Kliknięto przycisk!"));
+        button.setOnAction(_ -> label.setText("Kliknięto przycisk!"));
 
         VBox layout = new VBox(10, label, button);
         Scene scene = new Scene(layout, 300, 200);

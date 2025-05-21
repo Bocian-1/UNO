@@ -22,10 +22,7 @@ public enum Value
     plusFour(14);
 
     private int value;
-    private static Map map = new HashMap<>();
-
-    public static Value valueOf(int val) { return (Value) map.get(val); }
-    public int getValue() { return value; }
+    private static Map<Integer, Value> map = new HashMap<>();
     
     //konstruktor
     private Value(int value)
@@ -38,4 +35,7 @@ public enum Value
             map.put(val.value, val);
         }
     }
+
+    public static Value valueOf(int val) { return map.get(val); }
+    public int getValue() { return value; }
 }

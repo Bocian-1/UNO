@@ -66,6 +66,7 @@ public class Client implements Runnable
                         }
                         GUI.instance.updatePileCard();
                     }
+				default -> throw new IllegalArgumentException("Unexpected value: " + response.getCommand());
                 }
             }
         }

@@ -11,7 +11,7 @@ public enum Color
     noColor(4);
 
     private int value;
-    private static Map map = new HashMap<>();
+    private static Map<Integer, Color> map = new HashMap<>();
 
     //konstruktor
     private Color(int value) {
@@ -24,11 +24,6 @@ public enum Color
         }
     }
 
-    public static Color valueOf(int val) {
-        return (Color) map.get(val);
-    }
-
-    public int getValue() {
-        return value;
-    }
+    public static Color valueOf(int val) { return map.get(val); }
+    public int getValue() { return value; }
 }

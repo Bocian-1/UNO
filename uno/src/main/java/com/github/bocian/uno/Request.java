@@ -2,6 +2,7 @@ package com.github.bocian.uno;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Request extends Payload
 {
     private Command command;

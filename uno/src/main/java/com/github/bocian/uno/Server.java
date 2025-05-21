@@ -142,6 +142,7 @@ public class Server implements Runnable
                                 System.out.println(card.toString());
                             }*/
                         }
+					default -> throw new IllegalArgumentException("Unexpected value: " + request.getCommand());
                     }
                 }
             }
