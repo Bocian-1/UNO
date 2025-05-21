@@ -9,10 +9,14 @@ public class GameData
     List<Card> discardPile = new ArrayList<>();
     private List<Card> hands = new ArrayList<>();
     
+
+    public void throwCardOnPile(Card card) { discardPile.add(card); }
+    public Card getCardOnPile()	{ return discardPile.getLast(); }
+    
     
     public GameData()
     {
-
+    	//TODO
     }
     
     
@@ -22,10 +26,9 @@ public class GameData
         playStartCard();
     }
     
-    
+
     private void playStartCard()
     {
-
         Card card = deck.drawCard();
         discardPile.add(card);
     }
@@ -46,17 +49,5 @@ public class GameData
         deck.generateDeckFromDiscardPile(discardPile);
         discardPile.clear();
         playStartCard();
-    }
-    
-    
-    public void throwCardOnPile(Card card)
-    {
-        discardPile.add(card);
-    }
-    
-    
-    public Card getCardOnPile()
-    {
-        return discardPile.getLast();
     }
 }

@@ -9,6 +9,10 @@ public class Deck
     int top;
     Card[] deck = new Card[DECKMAXSIZE];
 
+
+    private void setTopAtStart() { top = DECKMAXSIZE-1; }
+    public Boolean canDraw() { return top>0; }
+    
     
     public Deck()
     {
@@ -16,12 +20,6 @@ public class Deck
         initCards();
         shuffleDeck();
         //printDeck();
-    }
-    
-    
-    private void setTopAtStart()
-    {
-        top = DECKMAXSIZE-1;
     }
     
     
@@ -124,18 +122,5 @@ public class Deck
         Card card = deck[top];
         top--;
         return card;
-    }
-    
-    
-    public Boolean canDraw()
-    {
-        if(top>0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 }

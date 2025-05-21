@@ -153,10 +153,14 @@ public class Server implements Runnable
                 shutdown();
             }
         }
+        
+        
         private boolean isPlayedCardLegal(Card playedCard)
         {
             return Card.canPlay(gameData.getCardOnPile(),playedCard);
         }
+        
+        
         private void sendResponse(Response response) throws IOException
         {
             System.out.println("odsyłam odpowiedź");
@@ -182,6 +186,7 @@ public class Server implements Runnable
             }
         }
     }
+    
     
     public static void main(String[] args)
     {

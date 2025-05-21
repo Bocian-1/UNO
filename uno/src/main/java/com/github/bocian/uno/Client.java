@@ -154,7 +154,6 @@ public class Client implements Runnable
     
     class InputHandler implements Runnable
     {
-
         @Override
         public void run()
         {
@@ -164,6 +163,7 @@ public class Client implements Runnable
                 while(!done)
                 {
                     String message = inReader.readLine();
+                    
                     switch (message)
                     {
                         case "1" -> drawACard();

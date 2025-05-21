@@ -13,8 +13,9 @@ public enum Color
     private int value;
     private static Map map = new HashMap<>();
 
+    //konstruktor
     private Color(int value) {
-        this.value = value;
+    	this.value = value;
     }
 
     static {

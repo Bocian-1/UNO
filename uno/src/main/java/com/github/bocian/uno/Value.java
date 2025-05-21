@@ -24,21 +24,18 @@ public enum Value
     private int value;
     private static Map map = new HashMap<>();
 
-    private Value(int value) {
-        this.value = value;
+    public static Value valueOf(int val) { return (Value) map.get(val); }
+    public int getValue() { return value; }
+    
+    //konstruktor
+    private Value(int value)
+    { 
+    	this.value = value;
     }
 
     static {
         for (Value val : Value.values()) {
             map.put(val.value, val);
         }
-    }
-
-    public static Value valueOf(int val) {
-        return (Value) map.get(val);
-    }
-
-    public int getValue() {
-        return value;
     }
 }

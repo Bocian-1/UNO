@@ -29,7 +29,6 @@ public class HelloApplication extends Application
     public static void main(String[] args)
     {
         Deck deck = new Deck();
-
         deck.printDeck();
         //launch();
     }

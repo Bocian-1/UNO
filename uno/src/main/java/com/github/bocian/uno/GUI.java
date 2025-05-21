@@ -42,30 +42,40 @@ public class GUI extends Application
     @FXML
     private Label cardCountLabel;
     
+
+    private Card getPileCard() { return playerData.getCardOnPile(); }
+    private Card getCurrentCard() { return playerData.getHand().get(currentCardIndex); }
+    @FXML	
+    public void updateCardCount() { cardCountLabel.setText(currentCardIndex+1 + "/" + playerData.getHand().size()); }
+    public void setCardCount(int left,int right) { cardCountLabel.setText(left+1 + "/" + right); }
+    @FXML
+    private void playACard() { playerData.getClient().playACard(playerData.getHand().get(currentCardIndex)); }
+    private void setCardColor(Rectangle rect,Card card) { rect.setFill(getColor(card)); }
+    
     
     public GUI()
     {
     	//TODO
     }
-
+    
+    
+    @FXML
+    public void test()
+    {
+    	//TODO
+    }
+    
     
     @FXML
     private void switchToRightCard()
     {
         int handSize = playerData.getHand().size();
+        if(currentCardIndex+1 >= handSize)  currentCardIndex = 0;
+        else 								currentCardIndex++;
 
-        if(currentCardIndex+1 >= handSize)
-        {
-            currentCardIndex = 0;
-        }
-        else
-        {
-            currentCardIndex++;
-        }
         updateCardCount();
         printCurrentCard();
         setCardColor(myCardRect,getCurrentCard());
-
     }
     
     
@@ -74,14 +84,9 @@ public class GUI extends Application
     {
         int handSize = playerData.getHand().size();
         if(handSize == 0) return;
-        if(currentCardIndex-1 < 0)
-        {
-            currentCardIndex = handSize-1;
-        }
-        else
-        {
-            currentCardIndex--;
-        }
+        if(currentCardIndex-1 < 0) 	currentCardIndex = handSize-1;
+        else 						currentCardIndex--;
+        
         updateCardCount();
         printCurrentCard();
         setCardColor(myCardRect,getCurrentCard());
@@ -100,27 +105,7 @@ public class GUI extends Application
         stage.show();
     }
     
-    
-    @FXML
-    public void test()
-    {
-    	//TODO
-    }
-    
-    
-    @FXML
-    public void updateCardCount()
-    {
-        cardCountLabel.setText(currentCardIndex+1 + "/" + playerData.getHand().size());
-    }
-    
-    
-    public void setCardCount(int left,int right)
-    {
-        cardCountLabel.setText(left+1 + "/" + right);
-    }
-    
-    
+   
     @FXML
     public void updatePileCard()
     {
@@ -131,23 +116,12 @@ public class GUI extends Application
     
     public void changeToNearest()
     {
-        if(currentCardIndex <= 0)
-        {
-            currentCardIndex = 0;
-        }
-        else
-        {
-            currentCardIndex--;
-        }
+        if(currentCardIndex <= 0) 	currentCardIndex = 0;
+        else 						currentCardIndex--;
+
         setCardColor(myCardRect,getCurrentCard());
         Platform.runLater(this::printCurrentCard);
-
     }
-    
-    
-    private Card getPileCard()		{ return playerData.getCardOnPile(); }
-    private Card getCurrentCard()	{ return playerData.getHand().get(currentCardIndex); }
-    
     
     private void printCurrentCard()
     {
@@ -169,23 +143,7 @@ public class GUI extends Application
         setCardCount(currentCardIndex,playerData.getHand().size()+1);
         playerData.getClient().drawACard();
 
-        if(playerData.getHand().isEmpty())
-        {
-            printCurrentCard();
-        }
-    }
-    
-    
-    @FXML
-    private void playACard()
-    {
-        playerData.getClient().playACard(playerData.getHand().get(currentCardIndex));
-    }
-    
-    
-    private void setCardColor(Rectangle rect,Card card)
-    {
-        rect.setFill(getColor(card));
+        if(playerData.getHand().isEmpty()) printCurrentCard();
     }
     
     
