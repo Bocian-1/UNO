@@ -18,7 +18,7 @@ public enum Value
     plusTwo(10),
     stop(11),
     swapTurn(12),
-    changeColor(13),
+    wildCard(13),
     plusFour(14);
 
     private int value;

@@ -45,7 +45,7 @@ public class Deck
         
         for(int i = 0;i<8;i++)
         {
-            deck[head] = new Card(Value.valueOf(i/4+Value.changeColor.getValue()),Color.noColor);
+            deck[head] = new Card(Value.valueOf(i/4+Value.wildCard.getValue()),Color.noColor);
             head++;
         }
         
