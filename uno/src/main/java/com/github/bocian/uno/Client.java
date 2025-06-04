@@ -58,14 +58,14 @@ public class Client implements Runnable
                     {
                         playerData.setCardOnPile((Card)response.getPayload());
                         System.out.println("karta na kupce: " + playerData.getCardOnPile().toString());
-                        /*
+                        
                         while(GUI.instance == null)
                         {
                             System.out.println("czekam na GUI");
                             Thread.sleep(100);
                         }
-                        //GUI.instance.updatePileCard();
-                        */
+                        GUI.instance.updatePileCard();
+                        
                     }
 				default -> throw new IllegalArgumentException("Unexpected value: " + response.getCommand());
                 }
@@ -203,6 +203,6 @@ public class Client implements Runnable
         Thread thread = new Thread(client);
         thread.start();
 
-        //Application.launch(GUI.class);
+        Application.launch(GUI.class);
     }
 }
