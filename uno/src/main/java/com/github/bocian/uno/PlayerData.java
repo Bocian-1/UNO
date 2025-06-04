@@ -2,6 +2,8 @@ package com.github.bocian.uno;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.github.bocian.uno.GameData;
+
 
 public class PlayerData
 {
@@ -23,4 +25,11 @@ public class PlayerData
         hand = new ArrayList<>();
         myTurn = false;
     }
+
+    public void drawCards(int count, GameData gameData) {
+        for (int i = 0; i < count; i++) {
+            drawCard(gameData.drawCard());
+        }
+    }
+
 }
