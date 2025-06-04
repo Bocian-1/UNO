@@ -22,6 +22,7 @@ public class Client implements Runnable
         {
             client = new Socket("localhost",Server.PORT);
             System.out.println("połączono z serverem!");
+            Logger.logEvent("Server connection established");
             playerData = new PlayerData(this);
             GUI.playerData = playerData;
 
@@ -40,6 +41,7 @@ public class Client implements Runnable
                     case DRAW_CARD ->
                     {
                         playerData.drawCard((Card)response.getPayload());
+                        Logger.logEvent("Card drawn");
                     }
                     case PLAY_CARD ->
                     {
@@ -48,10 +50,13 @@ public class Client implements Runnable
                             System.out.println("zagrono karte: " + playedCard.toString());
                             playerData.getHand().remove(playedCard);
                             GUI.instance.changeToNearest();
+                            GUI.instance.updateCardCountText();
+                            Logger.logEvent("Played  " + playedCard.toString());
                         }
                         else
                         {
                             System.out.println("nielegalny ruch");
+                            Logger.logEvent("Illegal move!");
                         }
                     }
                     case GET_PILE_CARD ->
@@ -62,6 +67,7 @@ public class Client implements Runnable
                         while(GUI.instance == null)
                         {
                             System.out.println("czekam na GUI");
+                            Logger.logEvent("Waiting for GUI...");
                             Thread.sleep(100);
                         }
                         GUI.instance.updatePileCard();
@@ -74,6 +80,7 @@ public class Client implements Runnable
         catch (Exception e)
         {
             System.out.println("rozłączono z serverem");
+            Logger.logEvent("Server connection lost");
             shutdown();
         }
     }
@@ -101,6 +108,7 @@ public class Client implements Runnable
         catch (IOException e)
         {
             System.out.println("blad polaczenia");
+            Logger.logEvent("Connection Error");
             //ignore
         }
     }
@@ -129,7 +137,7 @@ public class Client implements Runnable
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+           throw new RuntimeException(e);
         }
     }
     

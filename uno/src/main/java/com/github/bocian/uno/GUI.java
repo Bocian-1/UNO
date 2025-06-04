@@ -46,6 +46,7 @@ public class GUI extends Application
     public void setCardCount(int left,int right) { cardCountLabel.setText(left+1 + "/" + right); }
     @FXML
     private void playACard() { playerData.getClient().playACard(playerData.getHand().get(currentCardIndex)); }
+    public static void setPlayerData(PlayerData data) { playerData = data; }
     
     private void setCard(ImageView img,Card card) 
     { 
@@ -125,6 +126,10 @@ public class GUI extends Application
         Logger.logEvent("Updated card pile");
     }
 
+    public void updateCardCountText()
+    {
+        Platform.runLater(this::updateCardCount);
+    }
     
     public void changeToNearest()
     {
