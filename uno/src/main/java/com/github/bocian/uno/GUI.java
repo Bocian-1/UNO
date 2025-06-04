@@ -125,7 +125,10 @@ public class GUI extends Application
         Logger.logEvent("Updated card pile");
     }
 
-    
+    public void updateCardCountText()
+    {
+        Platform.runLater(this::updateCardCount);
+    }
     public void changeToNearest()
     {
         if(currentCardIndex <= 0) currentCardIndex = 0;

@@ -48,6 +48,7 @@ public class Client implements Runnable
                             System.out.println("zagrono karte: " + playedCard.toString());
                             playerData.getHand().remove(playedCard);
                             GUI.instance.changeToNearest();
+                            GUI.instance.updateCardCountText();
                         }
                         else
                         {
