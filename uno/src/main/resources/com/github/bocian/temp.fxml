@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox alignment="CENTER" prefHeight="628.0" prefWidth="1073.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.bocian.uno.GUI">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Pane prefHeight="657.0" prefWidth="1054.0">
+      <children>
+         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9e1f" height="588.0" opacity="0.57" stroke="BLACK" strokeType="INSIDE" width="1034.0" />
+         <Pane layoutY="354.0" prefHeight="200.0" prefWidth="1034.0">
+            <children>
+               <StackPane layoutX="453.0" prefHeight="200.0" prefWidth="114.0">
+                  <children>
+                     <ImageView fx:id="myCardIMG" fitHeight="200.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+                     <Rectangle fx:id="myCardRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+                     <Label fx:id="myCardLabel" text="myCard" />
+                  </children>
+               </StackPane>
+               <Button fx:id="swipeRightButton" layoutX="594.0" layoutY="68.0" mnemonicParsing="false" onAction="#switchToRightCard" prefHeight="47.0" prefWidth="28.0" text="&gt;" />
+               <Button fx:id="swipeLeftButton" layoutX="411.0" layoutY="68.0" mnemonicParsing="false" onAction="#switchToLeftCard" prefHeight="47.0" prefWidth="28.0" text="&lt;" />
+               <Button fx:id="drawCardButton" layoutX="186.0" layoutY="38.0" mnemonicParsing="false" onAction="#requestACard" prefHeight="106.0" prefWidth="120.0" text="drawCard" />
+               <Button fx:id="playCardButton" layoutX="736.0" layoutY="38.0" mnemonicParsing="false" onAction="#playACard" prefHeight="106.0" prefWidth="120.0" text="playCard" />
+            </children>
+         </Pane>
+         <StackPane layoutX="453.0" layoutY="50.0" prefHeight="200.0" prefWidth="114.0">
+            <children>
+               <ImageView fx:id="pileCardIMG" fitHeight="200.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" />
+               <Rectangle fx:id="pileCardRect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+               <Label fx:id="pileCardLabel" text="pileCard" />
+            </children>
+         </StackPane>
+         <Label fx:id="cardCountLabel" layoutX="501.0" layoutY="554.0" text="1/7" />
+      </children>
+   </Pane>
+</VBox>
