@@ -119,18 +119,17 @@ public class Client implements Runnable
         if(playerData.getHand().size() <=0)
         {
             System.out.println("pusta reka");
+            return;
         }
-        else
+        
+        try
         {
-            try
-            {
-                playedCard = card;
-                sendRequestToServer(Request.playCard(playedCard));
-            }
-            catch (IOException e)
-            {
-                throw new RuntimeException(e);
-            }
+            playedCard = card;
+            sendRequestToServer(Request.playCard(playedCard));
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
         }
     }
     
