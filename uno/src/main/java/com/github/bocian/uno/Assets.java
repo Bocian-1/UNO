@@ -12,9 +12,9 @@ package com.github.bocian.uno;
  */
 
 public enum Assets {
-	RED_0, RED_1, RED_2, RED_3, RED_4, RED_5, RED_6, RED_7, RED_8, RED_9, RED_SKIP, RED_REVERSE, RED_DRAW,
-	BLUE_0, BLUE_1, BLUE_2, BLUE_3, BLUE_4, BLUE_5, BLUE_6, BLUE_7, BLUE_8, BLUE_9, BLUE_SKIP, BLUE_REVERSE, BLUE_DRAW,
-	GREEN_0, GREEN_1, GREEN_2, GREEN_3, GREEN_4, GREEN_5, GREEN_6, GREEN_7, GREEN_8, GREEN_9, GREEN_SKIP, GREEN_REVERSE, GREEN_DRAW,
-	YELLOW_0, YELLOW_1, YELLOW_2, YELLOW_3, YELLOW_4, YELLOW_5, YELLOW_6, YELLOW_7, YELLOW_8, YELLOW_, YELLOW_SKIP, YELLOW_REVERSE, YELLOW_DRAW,
-	WILD_COLOR, WILD_DRAW
+	red_zero, red_one, red_two, red_three, red_four, red_five, red_six, red_seven, red_eight, red_nine, red_stop, red_swapTurn, red_plusTwo,
+	blue_zero, blue_one, blue_two, blue_three, blue_four, blue_five, blue_six, blue_seven, blue_eight, blue_nine, blue_stop, blue_swapTurn, blue_plusTwo,
+	green_zero, green_one, green_two, green_three, green_four, green_five, green_six, green_seven, green_eight, green_nine, green_stop, green_swapTurn, green_plusTwo,
+	yellow_zero, yellow_one, yellow_two, yellow_three, yellow_four, yellow_five, yellow_six, yellow_seven, yellow_eight, yellow_, yellow_stop, yellow_swapTurn, yellow_plusTwo,
+	noColor_wildCard, noColor_plusFour
 }

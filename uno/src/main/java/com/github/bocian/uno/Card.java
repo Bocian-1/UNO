@@ -16,7 +16,7 @@ public class Card implements Serializable
     }
 
     @Override
-    public String toString() { return value + " " + color; }
+    public String toString() { return color + "_" + value; }
     public Value getValue() { return value; }
     public static Boolean canPlay(Card card1, Card card2)
     {
