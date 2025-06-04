@@ -33,6 +33,7 @@ public class Server implements Runnable
         {
             server = new ServerSocket(PORT);
             System.out.println("server został załączony na porcie: " + PORT);
+            Logger.logEvent("Server port reservation on port " + PORT);
 
             pool = Executors.newCachedThreadPool();
             while (!done)
@@ -42,6 +43,7 @@ public class Server implements Runnable
                 {
                     PrintWriter out = new PrintWriter(client.getOutputStream(), true);
                     out.println("Serwer osiągnął limit połączeń. Spróbuj później.");
+                    Logger.logEvent("Server connection limit reached");
                     client.close();
                     continue;
                 }
@@ -51,6 +53,7 @@ public class Server implements Runnable
                 pool.execute(handler);
             }
         } catch (Exception e) {
+            Logger.logEvent("Serer shutting down...");
             shutdown();
         }
     }
@@ -151,6 +154,7 @@ public class Server implements Runnable
             {
                 //handle
                 System.out.println("rozlaczono klienta");
+                Logger.logEvent("Client disconnected");
                 shutdown();
             }
         }
