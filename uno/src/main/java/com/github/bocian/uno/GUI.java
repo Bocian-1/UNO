@@ -44,8 +44,7 @@ public class GUI extends Application
     @FXML	
     public void updateCardCount() { cardCountLabel.setText(currentCardIndex+1 + "/" + playerData.getHand().size()); }
     public void setCardCount(int left,int right) { cardCountLabel.setText(left+1 + "/" + right); }
-    @FXML
-    private void playACard() { playerData.getClient().playACard(playerData.getHand().get(currentCardIndex)); }
+
     public static void setPlayerData(PlayerData data) { playerData = data; }
     
     private void setCard(ImageView img,Card card) 
@@ -63,11 +62,7 @@ public class GUI extends Application
     public GUI(){}
     
     
-    @FXML
-    public void test()
-    {
-    	//TODO
-    }
+
     
     
     @FXML
@@ -125,7 +120,10 @@ public class GUI extends Application
         );
         Logger.logEvent("Updated card pile");
     }
-
+    public void showFirstCard(Card card)
+    {
+        setCard(myCardIMG,card);
+    }
     public void updateCardCountText()
     {
         Platform.runLater(this::updateCardCount);
@@ -156,11 +154,32 @@ public class GUI extends Application
     @FXML
     private void requestACard()
     {
-        setCardCount(currentCardIndex,playerData.getHand().size()+1);
-        playerData.getClient().drawACard();
+        if(playerData.isMyTurn())
+        {
+            setCardCount(currentCardIndex,playerData.getHand().size()+1);
+            playerData.getClient().drawACard();
 
-        if(playerData.getHand().isEmpty()) printCurrentCard();
-        Logger.logEvent("Requested card from server");
+            if(!playerData.getHand().isEmpty()) printCurrentCard();
+            Logger.logEvent("Requested card from server");
+        }
+        else
+        {
+            System.out.println("nie można wykonać akcji - to nie twoja tura (GUI)");
+        }
+
+    }
+    @FXML
+    private void playACard()
+    {
+        if(playerData.isMyTurn())
+        {
+            playerData.getClient().playACard(playerData.getHand().get(currentCardIndex));
+        }
+        else
+        {
+            System.out.println("nie można wykonać akcji - to nie twoja tura (GUI)");
+        }
+
     }
     
     

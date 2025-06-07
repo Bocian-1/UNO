@@ -23,4 +23,12 @@ public class PlayerData
         hand = new ArrayList<>();
         myTurn = false;
     }
+    public void setMyTurn(boolean myTurn)
+    {
+        this.myTurn = myTurn;
+    }
+    public boolean isMyTurn()
+    {
+        return myTurn;
+    }
 }

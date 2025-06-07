@@ -20,6 +20,6 @@ public class Card implements Serializable
     public Value getValue() { return value; }
     public static Boolean canPlay(Card card1, Card card2)
     {
-        return (card1.color == card2.color || card1.value == card2.value || card2.color == Color.noColor);
+        return (card1.color == card2.color || card1.value == card2.value || card2.color == Color.noColor || card1.color == Color.noColor);
     }
 }

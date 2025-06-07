@@ -13,6 +13,7 @@ public class Request extends Payload
     public static Request drawCard() { return new Request(Command.DRAW_CARD); }
     public static Request playCard(Serializable card) { return new Request(Command.PLAY_CARD,card); }
     public static Request setName() { return new Request(Command.SET_NAME); }
+    public static Request getPileCard() { return new Request(Command.GET_PILE_CARD); }
     private Request(Command command) { this.command = command; }
     private Request(Command command, Serializable payload)
     { 

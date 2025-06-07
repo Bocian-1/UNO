@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
 
 public class Server implements Runnable
 {
-    public final static int PORT = 5000;
-    private final int MAX_PLAYERS = 4;
+    public final static int PORT = 50000;
+    private final int MAX_PLAYERS = 2;
 
     private ArrayList<ConnectionHandler> connections;
     private ServerSocket server;
@@ -24,6 +24,8 @@ public class Server implements Runnable
         connections = new ArrayList<>();
         gameData = new GameData();
         gameData.generateNewDeck();
+        pool = Executors.newCachedThreadPool();
+
     }
 
     @Override
@@ -35,22 +37,20 @@ public class Server implements Runnable
             System.out.println("server został załączony na porcie: " + PORT);
             Logger.logEvent("Server port reservation on port " + PORT);
 
-            pool = Executors.newCachedThreadPool();
+
             while (!done)
             {
                 Socket client = server.accept();
-                if (connections.size() >= MAX_PLAYERS)
-                {
-                    PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                    out.println("Serwer osiągnął limit połączeń. Spróbuj później.");
-                    Logger.logEvent("Server connection limit reached");
-                    client.close();
-                    continue;
-                }
-
                 ConnectionHandler handler = new ConnectionHandler(client);
                 connections.add(handler);
                 pool.execute(handler);
+                if(connections.size() == MAX_PLAYERS)
+                {
+                    broadcastGameStart();
+                    broadcastTurns(0);
+                    System.out.println("gracze dolaczyli, gra zaczeta");
+                    done = true;
+                }
             }
         } catch (Exception e) {
             Logger.logEvent("Serer shutting down...");
@@ -77,8 +77,38 @@ public class Server implements Runnable
             // ignore
         }
     }
-    
-    
+    void broadcastTurns(int playerTurnIndex)
+    {
+        for(int i = 0;i<connections.size();i++)
+        {
+            if(i == playerTurnIndex)
+            {
+                try {
+                    connections.get(i).sendResponse(Response.turnUpdate(true));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else {
+                try {
+                    connections.get(i).sendResponse(Response.turnUpdate(false));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+    void broadcastGameStart()
+    {
+        for(ConnectionHandler connection : connections)
+        {
+            try {
+                connection.sendResponse(Response.startGame());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     void broadcastCardOnPile()
     {
         for(ConnectionHandler connection : connections)
@@ -111,18 +141,23 @@ public class Server implements Runnable
             {
                 out = new ObjectOutputStream(client.getOutputStream());
                 in = new ObjectInputStream(client.getInputStream());
-                broadcastCardOnPile();
+
                 Request request;
                 while((request = (Request)in.readObject()) != null)
                 {
                     switch(request.getCommand())
                     {
+                        case GET_PILE_CARD ->
+                        {
+                            sendResponse(Response.sendPileCard(gameData.getCardOnPile()));
+                        }
                         case DRAW_CARD ->
                         {
                             System.out.println("otrzymano prosbe o karte");
                             Card card = gameData.drawCard();
 
                             Response response = new Response(card,Command.DRAW_CARD);
+                            broadcastTurns(gameData.getNextTurn(connections.size()));
                             sendResponse(response);
                         }
                         case PLAY_CARD ->
@@ -130,8 +165,16 @@ public class Server implements Runnable
                             Card playedCard = (Card)request.getPayload();
                             if(isPlayedCardLegal(playedCard))
                             {
+                                if(playedCard.value == Value.swapTurn) gameData.swapTurnDirections();
+                                else if(playedCard.value == Value.plusTwo) sendCards(2);
+                                else if(playedCard.value == Value.stop) gameData.getNextTurn(connections.size());
+                                else if(playedCard.value == Value.plusFour)
+                                {
+                                    sendCards(4);
+                                }
                                 gameData.throwCardOnPile(playedCard);
                                 broadcastCardOnPile();
+                                broadcastTurns(gameData.getNextTurn(connections.size()));
                                 sendResponse(Response.legalPlayedCard());
                             }
                             else
@@ -159,7 +202,14 @@ public class Server implements Runnable
             }
         }
         
-        
+        private void sendCards(int count) throws IOException
+        {
+            for(int i = 0;i<count;i++)
+            {
+                connections.get(gameData.getNextPlayer(connections.size())).sendResponse(new Response(gameData.drawCard(),Command.DRAW_CARD));
+            }
+
+        }
         private boolean isPlayedCardLegal(Card playedCard)
         {
             return Card.canPlay(gameData.getCardOnPile(),playedCard);

@@ -8,6 +8,8 @@ public class GameData
     private Deck deck;
     List<Card> discardPile = new ArrayList<>();
     private List<Card> hands = new ArrayList<>();
+    private int currentPlayerIndex = 0;
+    private boolean turnsSwapped;
 
 
     public void throwCardOnPile(Card card) { discardPile.add(card); }
@@ -16,6 +18,7 @@ public class GameData
 
     public GameData()
     {
+
     	//TODO
     }
 
@@ -46,5 +49,25 @@ public class GameData
         deck.generateDeckFromDiscardPile(discardPile);
         discardPile.clear();
         playStartCard();
+    }
+    public int getNextPlayer(int playerCount)
+    {
+        if(!turnsSwapped) return (currentPlayerIndex+1)%playerCount;
+        return ((currentPlayerIndex-1)+playerCount)%playerCount;
+
+    }
+    public int getNextTurn(int playerCount)
+    {
+        if(!turnsSwapped)
+        {
+            currentPlayerIndex = (currentPlayerIndex+1)%playerCount;
+            return currentPlayerIndex;
+        }
+        currentPlayerIndex = ((currentPlayerIndex-1)+playerCount)%playerCount;
+        return currentPlayerIndex;
+    }
+    public void swapTurnDirections()
+    {
+        turnsSwapped = !turnsSwapped;
     }
 }

@@ -1,6 +1,7 @@
 package com.github.bocian.uno;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import java.io.*;
 import java.net.*;
@@ -13,8 +14,13 @@ public class Client implements Runnable
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private boolean done = false;
+    private boolean gameStarted = false;
+    private boolean firstCard = true;
     public Card playedCard;
+    public Client()
+    {
 
+    }
     @Override
     public void run()
     {
@@ -29,52 +35,85 @@ public class Client implements Runnable
             out = new ObjectOutputStream(client.getOutputStream());
             in = new ObjectInputStream(client.getInputStream());
 
-            startInputThread();
-            drawStarterCards();
+
+
 
             //odbior informacji od servera
             Response response;
             while((response = (Response)in.readObject()) != null)
             {
-                switch (response.getCommand())
+                if(!gameStarted)
                 {
-                    case DRAW_CARD ->
+                    if(response.getCommand() == Command.START_GAME)
                     {
-                        playerData.drawCard((Card)response.getPayload());
-                        Logger.logEvent("Card drawn");
-                    }
-                    case PLAY_CARD ->
-                    {
-                        if(response.isSucceed())
-                        {
-                            System.out.println("zagrono karte: " + playedCard.toString());
-                            playerData.getHand().remove(playedCard);
-                            GUI.instance.changeToNearest();
-                            GUI.instance.updateCardCountText();
-                            Logger.logEvent("Played  " + playedCard.toString());
-                        }
-                        else
-                        {
-                            System.out.println("nielegalny ruch");
-                            Logger.logEvent("Illegal move!");
-                        }
-                    }
-                    case GET_PILE_CARD ->
-                    {
-                        playerData.setCardOnPile((Card)response.getPayload());
-                        System.out.println("karta na kupce: " + playerData.getCardOnPile().toString());
-                        
+                        System.out.println("gra zaczeta!");
+                        gameStarted = true;
+
+
                         while(GUI.instance == null)
                         {
                             System.out.println("czekam na GUI");
                             Logger.logEvent("Waiting for GUI...");
-                            Thread.sleep(100);
+                            Thread.sleep(500);
                         }
-                        GUI.instance.updatePileCard();
-                        
+                        sendRequestToServer(Request.getPileCard());
+                        startInputThread();
+                        drawStarterCards();
+                        Thread.sleep(400); // czekanie az dobrane zostana karty
+
+
+
                     }
-				default -> throw new IllegalArgumentException("Unexpected value: " + response.getCommand());
                 }
+                else
+                {
+                    switch (response.getCommand())
+                    {
+                        case TURN_UPDATE ->
+                        {
+                            playerData.setMyTurn(response.isSucceed());
+                            /*if(response.isSucceed()) System.out.println("twoja tura");
+                            else System.out.println("nie twoja tura");*/
+                        }
+                        case DRAW_CARD ->
+                        {
+                            Card drawedCard = (Card)response.getPayload();
+                            playerData.drawCard(drawedCard);
+                            Platform.runLater(() -> GUI.instance.updateCardCount());
+                            if(firstCard)
+                            {
+                                Platform.runLater(() -> GUI.instance.showFirstCard(drawedCard));
+                                firstCard = false;
+                            }
+                            Logger.logEvent("Card drawn");
+                        }
+                        case PLAY_CARD ->
+                        {
+                            if(response.isSucceed())
+                            {
+                                System.out.println("zagrono karte: " + playedCard.toString());
+                                playerData.getHand().remove(playedCard);
+                                GUI.instance.changeToNearest();
+                                GUI.instance.updateCardCountText();
+                                Logger.logEvent("Played  " + playedCard.toString());
+                            }
+                            else
+                            {
+                                System.out.println("nielegalny ruch");
+                                Logger.logEvent("Illegal move!");
+                            }
+                        }
+                        case GET_PILE_CARD ->
+                        {
+                            playerData.setCardOnPile((Card)response.getPayload());
+                            System.out.println("karta na kupce: " + playerData.getCardOnPile().toString());
+                            GUI.instance.updatePileCard();
+
+                        }
+                        default -> throw new IllegalArgumentException("Unexpected value: " + response.getCommand());
+                    }
+                }
+
             }
         }
         catch (Exception e)
@@ -190,7 +229,7 @@ public class Client implements Runnable
                         case "4" ->
                         {
                             System.out.println(playerData.getCardOnPile().toString());
-                            GUI.instance.test();
+
                         }
                         default -> System.out.println("nieprawidlowa komenda");
                     }
@@ -209,7 +248,7 @@ public class Client implements Runnable
         Client client = new Client();
         Thread thread = new Thread(client);
         thread.start();
-
         Application.launch(GUI.class);
+
     }
 }
