@@ -1,0 +1,19 @@
+[2025-06-09T18:44:45.769393200] Server connection established
+[2025-06-09T18:44:45.935949500] Waiting for GUI...
+[2025-06-09T18:44:46.443570700] Waiting for GUI...
+[2025-06-09T18:44:46.904341600] Assets loaded
+[2025-06-09T18:44:46.947228200] Waiting for GUI...
+[2025-06-09T18:44:47.448357200] Waiting for GUI...
+[2025-06-09T18:44:47.989515900] GUI initialised succesfully
+[2025-06-09T18:44:48.440000600] Updated card pile
+[2025-06-09T18:44:48.443990100] Card drawn
+[2025-06-09T18:44:48.450973600] Card drawn
+[2025-06-09T[2025-06-09T18:44:57.137202300] Changed card selection
+[2025-06-09T18:44:57.501151300] Changed card selection
+[2025-06-09T18:44:57.790642900] Changed card selection
+[2025-06-09T18:45:03.828295300] Updated card pile
+[2025-06-09T18:45:03.839265400] Played  blue_plusFour
+98] Card drawn
+[2025-06-09T18:45:03.835276900] Card drawn
+[2025-06-09T18:45:03.835276900] Card drawn
+[2025-06-09T18:45:03.836274400] Updated card pile

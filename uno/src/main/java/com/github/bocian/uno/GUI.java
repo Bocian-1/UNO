@@ -243,6 +243,8 @@ public class GUI extends Application
 		imageMap.put(Assets.red_stop, safeLoad("/com/github/bocian/assets/red_stop.png"));
 		imageMap.put(Assets.red_swapTurn, safeLoad("/com/github/bocian/assets/red_swapTurn.png"));
 		imageMap.put(Assets.red_plusTwo, safeLoad("/com/github/bocian/assets/red_plusTwo.png"));
+		imageMap.put(Assets.red_plusFour, safeLoad("/com/github/bocian/assets/red_plusFour.png"));
+		imageMap.put(Assets.red_wildCard, safeLoad("/com/github/bocian/assets/red_wildCard.png"));
 		imageMap.put(Assets.blue_zero, safeLoad("/com/github/bocian/assets/blue_zero.png"));
 		imageMap.put(Assets.blue_one, safeLoad("/com/github/bocian/assets/blue_one.png"));
 		imageMap.put(Assets.blue_two, safeLoad("/com/github/bocian/assets/blue_two.png"));
@@ -256,6 +258,8 @@ public class GUI extends Application
 		imageMap.put(Assets.blue_stop, safeLoad("/com/github/bocian/assets/blue_stop.png"));
 		imageMap.put(Assets.blue_swapTurn, safeLoad("/com/github/bocian/assets/blue_swapTurn.png"));
 		imageMap.put(Assets.blue_plusTwo, safeLoad("/com/github/bocian/assets/blue_plusTwo.png"));
+		imageMap.put(Assets.blue_plusFour, safeLoad("/com/github/bocian/assets/blue_plusFour.png"));
+		imageMap.put(Assets.blue_wildCard, safeLoad("/com/github/bocian/assets/blue_wildCard.png"));
 		imageMap.put(Assets.green_zero, safeLoad("/com/github/bocian/assets/green_zero.png"));
 		imageMap.put(Assets.green_one, safeLoad("/com/github/bocian/assets/green_one.png"));
 		imageMap.put(Assets.green_two, safeLoad("/com/github/bocian/assets/green_two.png"));
@@ -269,6 +273,8 @@ public class GUI extends Application
 		imageMap.put(Assets.green_stop, safeLoad("/com/github/bocian/assets/green_stop.png"));
 		imageMap.put(Assets.green_swapTurn, safeLoad("/com/github/bocian/assets/green_swapTurn.png"));
 		imageMap.put(Assets.green_plusTwo, safeLoad("/com/github/bocian/assets/green_plusTwo.png"));
+		imageMap.put(Assets.green_plusFour, safeLoad("/com/github/bocian/assets/green_plusFour.png"));
+		imageMap.put(Assets.green_wildCard, safeLoad("/com/github/bocian/assets/green_wildCard.png"));
 		imageMap.put(Assets.yellow_zero, safeLoad("/com/github/bocian/assets/yellow_zero.png"));
 		imageMap.put(Assets.yellow_one, safeLoad("/com/github/bocian/assets/yellow_one.png"));
 		imageMap.put(Assets.yellow_two, safeLoad("/com/github/bocian/assets/yellow_two.png"));
@@ -282,6 +288,8 @@ public class GUI extends Application
 		imageMap.put(Assets.yellow_stop, safeLoad("/com/github/bocian/assets/yellow_stop.png"));
 		imageMap.put(Assets.yellow_swapTurn, safeLoad("/com/github/bocian/assets/yellow_swapTurn.png"));
 		imageMap.put(Assets.yellow_plusTwo, safeLoad("/com/github/bocian/assets/yellow_plusTwo.png"));
+		imageMap.put(Assets.yellow_plusFour, safeLoad("/com/github/bocian/assets/yellow_plusFour.png"));
+		imageMap.put(Assets.yellow_wildCard, safeLoad("/com/github/bocian/assets/yellow_wildCard.png"));
 		imageMap.put(Assets.noColor_wildCard, safeLoad("/com/github/bocian/assets/noColor_wildCard.png"));
 		imageMap.put(Assets.noColor_plusFour, safeLoad("/com/github/bocian/assets/noColor_plusFour.png"));
 		
