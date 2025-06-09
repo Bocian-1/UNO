@@ -77,6 +77,7 @@ public class Server implements Runnable
             // ignore
         }
     }
+    
     void broadcastTurns(int playerTurnIndex)
     {
         for(int i = 0;i<connections.size();i++)
@@ -98,6 +99,7 @@ public class Server implements Runnable
             }
         }
     }
+    
     void broadcastGameStart()
     {
         for(ConnectionHandler connection : connections)

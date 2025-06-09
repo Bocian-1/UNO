@@ -17,10 +17,9 @@ public class Client implements Runnable
     private boolean gameStarted = false;
     private boolean firstCard = true;
     public Card playedCard;
-    public Client()
-    {
-
-    }
+    
+    public Client() {}
+    
     @Override
     public void run()
     {
@@ -60,9 +59,6 @@ public class Client implements Runnable
                         startInputThread();
                         drawStarterCards();
                         Thread.sleep(400); // czekanie az dobrane zostana karty
-
-
-
                     }
                 }
                 else
@@ -72,8 +68,12 @@ public class Client implements Runnable
                         case TURN_UPDATE ->
                         {
                             playerData.setMyTurn(response.isSucceed());
-                            /*if(response.isSucceed()) System.out.println("twoja tura");
-                            else System.out.println("nie twoja tura");*/
+                            if(response.isSucceed()) {
+                            	GUI.instance.setTurnLabel();
+                            }
+                            else {
+                            	GUI.instance.unsetTurnLabel();
+                            }
                         }
                         case DRAW_CARD ->
                         {

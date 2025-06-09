@@ -18,7 +18,6 @@ public class GameData
 
     public GameData()
     {
-
     	//TODO
     }
 

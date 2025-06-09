@@ -16,19 +16,14 @@ public class PlayerData
     public Client getClient() { return client; }
     public Card getCardOnPile()	{ return cardOnPile;}
     public void setCardOnPile(Card cardOnPile) { this.cardOnPile = cardOnPile; }
-
+    public void setMyTurn(boolean myTurn) { this.myTurn = myTurn; }
+    public boolean getMyTurn() { return myTurn; }
+    
     public PlayerData(Client client)
     {
         this.client = client;
         hand = new ArrayList<>();
         myTurn = false;
     }
-    public void setMyTurn(boolean myTurn)
-    {
-        this.myTurn = myTurn;
-    }
-    public boolean isMyTurn()
-    {
-        return myTurn;
-    }
+
 }

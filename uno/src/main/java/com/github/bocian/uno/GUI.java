@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -37,6 +39,8 @@ public class GUI extends Application
     private ImageView pileCardIMG;
     @FXML
     private Label cardCountLabel;
+    @FXML
+    private TextField turnLabel;
     
 
     private Card getPileCard() { return playerData.getCardOnPile(); }
@@ -60,9 +64,6 @@ public class GUI extends Application
     
     
     public GUI(){}
-    
-
-
     
     
     @FXML
@@ -154,7 +155,7 @@ public class GUI extends Application
     @FXML
     private void requestACard()
     {
-        if(playerData.isMyTurn())
+        if(playerData.getMyTurn())
         {
             setCardCount(currentCardIndex,playerData.getHand().size()+1);
             playerData.getClient().drawACard();
@@ -166,12 +167,12 @@ public class GUI extends Application
         {
             System.out.println("nie można wykonać akcji - to nie twoja tura (GUI)");
         }
-
     }
+    
     @FXML
     private void playACard()
     {
-        if(playerData.isMyTurn())
+        if(playerData.getMyTurn())
         {
             Card card = playerData.getHand().get(currentCardIndex);
 
@@ -187,11 +188,19 @@ public class GUI extends Application
         {
             System.out.println("nie można wykonać akcji - to nie twoja tura (GUI)");
         }
+    }
+    
 
+    public void setTurnLabel() { 
+    	turnLabel.setText("Twoja tura");
+    }
+    
+    public void unsetTurnLabel() { 
+    	turnLabel.setText("Nie twoja tura");
     }
     
     
-    javafx.scene.paint.Color getColor(Card card)
+    Color getColor(Card card)
     {
         return switch(card.color)
         {
@@ -205,7 +214,7 @@ public class GUI extends Application
     }
 
     private com.github.bocian.uno.Color askForColor() {
-        javafx.scene.control.ChoiceDialog<String> dialog = new javafx.scene.control.ChoiceDialog<>("red", "red", "yellow", "green", "blue");
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("red", "red", "yellow", "green", "blue");
         dialog.setTitle("Wybierz kolor");
         dialog.setHeaderText("Zagrałeś kartę specjalną!");
         dialog.setContentText("Wybierz kolor:");
