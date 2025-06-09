@@ -61,7 +61,7 @@ public class GUI extends Application
     
     public GUI(){}
     
-    
+
 
     
     
@@ -173,7 +173,15 @@ public class GUI extends Application
     {
         if(playerData.isMyTurn())
         {
-            playerData.getClient().playACard(playerData.getHand().get(currentCardIndex));
+            Card card = playerData.getHand().get(currentCardIndex);
+
+            // Jeśli to karta specjalna (Wild lub +4), wybierz kolor
+            if (card.getValue() == Value.wildCard || card.getValue() == Value.plusFour) {
+                com.github.bocian.uno.Color selectedColor = askForColor();
+                card.setColor(selectedColor);
+            }
+
+            playerData.getClient().playACard(card);
         }
         else
         {
@@ -195,7 +203,22 @@ public class GUI extends Application
             default -> Color.PINK;
         };
     }
-    
+
+    private com.github.bocian.uno.Color askForColor() {
+        javafx.scene.control.ChoiceDialog<String> dialog = new javafx.scene.control.ChoiceDialog<>("red", "red", "yellow", "green", "blue");
+        dialog.setTitle("Wybierz kolor");
+        dialog.setHeaderText("Zagrałeś kartę specjalną!");
+        dialog.setContentText("Wybierz kolor:");
+
+        var result = dialog.showAndWait();
+        if (result.isPresent()) {
+            return com.github.bocian.uno.Color.valueOf(result.get());
+        } else {
+            return com.github.bocian.uno.Color.red; // domyślnie czerwony
+        }
+    }
+
+
     private static void loadAssets() {
 		imageMap = new EnumMap<>(Assets.class);
 		imageMap.put(Assets.red_zero, safeLoad("/com/github/bocian/assets/red_zero.png"));

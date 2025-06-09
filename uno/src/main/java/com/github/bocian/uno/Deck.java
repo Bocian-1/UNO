@@ -88,7 +88,6 @@ public class Deck
     
     public Card drawCard()
     {
-        //handle
         Card card = deck[top];
         top--;
         return card;

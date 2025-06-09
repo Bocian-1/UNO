@@ -18,8 +18,16 @@ public class Card implements Serializable
     @Override
     public String toString() { return color + "_" + value; }
     public Value getValue() { return value; }
-    public static Boolean canPlay(Card card1, Card card2)
-    {
-        return (card1.color == card2.color || card1.value == card2.value || card2.color == Color.noColor || card1.color == Color.noColor);
+    public void setColor(Color color) {
+        this.color = color;
     }
+    public static boolean canPlay(Card pileCard, Card playedCard)
+    {
+        if (playedCard.value == Value.wildCard || playedCard.value == Value.plusFour) {
+            return true;
+        }
+        // Jeśli kolor lub wartość pasują – legalny ruch
+        return pileCard.color == playedCard.color || pileCard.value == playedCard.value;
+    }
+
 }
