@@ -25,7 +25,7 @@ public class Client implements Runnable
     {
         try
         {
-            client = new Socket("localhost",Server.PORT);
+            client = new Socket("192.168.43.137",Server.PORT);
             System.out.println("połączono z serverem!");
             Logger.logEvent("Server connection established");
             playerData = new PlayerData(this);
@@ -93,6 +93,11 @@ public class Client implements Runnable
                             {
                                 System.out.println("zagrono karte: " + playedCard.toString());
                                 playerData.getHand().remove(playedCard);
+                                if(playerData.getHand().size() == 0)
+                                {
+                                    Platform.runLater(() -> GUI.instance.showWinPopup());
+                                    //GUI ODPALA OKIENKO ZE WYGRALES
+                                }
                                 GUI.instance.changeToNearest();
                                 GUI.instance.updateCardCountText();
                                 Logger.logEvent("Played  " + playedCard.toString());

@@ -14,7 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
@@ -150,7 +152,20 @@ public class GUI extends Application
             String cardData = getCurrentCard().toString();
         }
     }
-    
+    public void showWinPopup()
+    {
+        Stage popupStage = new Stage();
+        popupStage.initModality(Modality.APPLICATION_MODAL); // Blokuje inne okna
+        popupStage.setTitle("Gratulacje!");
+
+        Label label = new Label("WYGRAŁEŚ!");
+        StackPane layout = new StackPane(label);
+        layout.setPrefSize(200, 100);
+
+        Scene scene = new Scene(layout);
+        popupStage.setScene(scene);
+        popupStage.showAndWait(); // Czeka aż użytkownik zamknie okno
+    }
     
     @FXML
     private void requestACard()
@@ -190,7 +205,7 @@ public class GUI extends Application
         }
     }
     
-
+    public void setWinLabel() {turnLabel.setText("wygrałes");}
     public void setTurnLabel() { 
     	turnLabel.setText("Twoja tura");
     }
